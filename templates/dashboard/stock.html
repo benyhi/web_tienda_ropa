@@ -1,0 +1,41 @@
+{% extends "dashboard/panel.html" %}
+
+{% block content %}
+<div>
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Categoria</th>
+            <th>Subcategoria</th>
+            <th>Marca</th>
+            <th>Imagen</th>
+            <th>Variacion</th>
+            <th>Cantidad Disponible</th>
+            <th>Acciones</th>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+                <tr>
+                    <td>{{producto.id}}</td>
+                    <td>{{producto.nombre}}</td>
+                    <td>{{producto.descripcion}}</td>
+                    <td>{{producto.precio}}</td>
+                    <td>{{producto.categoria}}</td>
+                    <td>{{producto.subcategoria}}</td>
+                    <td>{{producto.marca}}</td>
+                    <td>{{producto.url_imagen}}</td>
+                    <td>{{producto.variacion}}</td>
+                    <td>{{producto.cantidad_disponible}}</td>
+                    <td>
+                        <a href="{{ url_for('main.editar', id=producto.id) }}">Editar</a>
+                        <a href="{{ url_for('main.eliminar', id=producto.id) }}">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -3,6 +3,7 @@ from flask_wtf.csrf import CSRFProtect
 from flask_login import login_user, logout_user, login_required
 from models.auth import Autenticacion
 from models.bd import User
+from models.product import Producto
 
 bp = Blueprint("main", __name__, template_folder="../templates")
 
@@ -52,7 +53,21 @@ def logout():
     return redirect(url_for("main.index"))
 
 
+# RUTAS DEL DASHBOARD
 @bp.route("/dashboard")
 @login_required
 def dashboard():
     return render_template("dashboard/panel.html")
+
+@bp.route("/dashboard/stock")
+@login_required
+def stock():
+    db = Producto()
+    productos = db.obtenerTodos()
+    print(productos)
+    return(render_template('dashboard/stock.html', productos=productos))
+
+@bp.route("/dashboard/stock/editar/<int:id>")
+@login_required
+def editar():
+    pass

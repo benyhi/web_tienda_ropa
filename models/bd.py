@@ -18,7 +18,4 @@ class User:
             self.session.rollback()
             raise e
         finally:
-            self.close_conecction()
-
-    def close_conecction(self):
-        self.session.close()
+            self.session.close()
