@@ -67,7 +67,12 @@ def stock():
     print(productos)
     return(render_template('dashboard/stock.html', productos=productos))
 
-@bp.route("/dashboard/stock/editar/<int:id>")
+@bp.route("/dashboard/stock/editar", methods=['POST'])
 @login_required
 def editar():
-    pass
+    try:
+        data = request.get_json()
+        print(data)
+        return render_template('dashboard/stock.html')
+    except Exception as e:
+        return f"error", str(e)

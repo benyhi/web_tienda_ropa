@@ -30,12 +30,63 @@
                     <td>{{producto.variacion}}</td>
                     <td>{{producto.cantidad_disponible}}</td>
                     <td>
-                        <a href="{{ url_for('main.editar', id=producto.id) }}">Editar</a>
-                        <a href="{{ url_for('main.eliminar', id=producto.id) }}">Eliminar</a>
+                        <button id="editar" data-id="{{producto.id}}">Editar</button>
+                        <button id="eliminar" data-id="{{producto.id}}">Eliminar</button>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+    <div id="modal-editar" class="modal">
+        <div class="modal-contenido">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <h2>Editar Producto</h2>
+            <form id="editar-form">
+                <div>
+                    <label for="input-id">ID:</label>
+                    <input type="text" id="input-id" readonly>
+                </div>
+                <div>
+                    <label for="input-nombre">Nombre:</label>
+                    <input type="text" id="input-nombre">
+                </div>
+                <div>
+                    <label for="input-descripcion">Descripción:</label>
+                    <input type="text" id="input-descripcion">
+                </div>
+                <div>
+                    <label for="input-precio">Precio:</label>
+                    <input type="text" id="input-precio">
+                </div>
+                <div>
+                    <label for="input-categoria">Categoría:</label>
+                    <input type="text" id="input-categoria">
+                </div>
+                <div>
+                    <label for="input-subcategoria">Subcategoría:</label>
+                    <input type="text" id="input-subcategoria">
+                </div>
+                <div>
+                    <label for="input-marca">Marca:</label>
+                    <input type="text" id="input-marca">
+                </div>
+                <div>
+                    <label for="input-url-imagen">URL Imagen:</label>
+                    <input type="text" id="input-url-imagen">
+                </div>
+                <div>
+                    <label for="input-variacion">Variación:</label>
+                    <input type="text" id="input-variacion">
+                </div>
+                <div>
+                    <label for="input-cantidad-disponible">Cantidad Disponible:</label>
+                    <input type="text" id="input-cantidad-disponible">
+                </div>
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" onclick="cerrarModal()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+    
 </div>
 {% endblock %}
