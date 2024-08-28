@@ -2,7 +2,7 @@
 
 {% block content %}
 <div>
-    <table>
+    <table id="tabla">
         <thead>
             <th>ID</th>
             <th>Nombre</th>
@@ -16,7 +16,7 @@
             <th>Cantidad Disponible</th>
             <th>Acciones</th>
         </thead>
-        <tbody>
+        <!-- <tbody>
             {% for producto in productos %}
                 <tr>
                     <td>{{producto.id}}</td>
@@ -35,7 +35,7 @@
                     </td>
                 </tr>
             {% endfor %}
-        </tbody>
+        </tbody> -->
     </table>
     <div id="modal-editar" class="modal">
         <div class="modal-contenido">

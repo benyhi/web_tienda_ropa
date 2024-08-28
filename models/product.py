@@ -6,6 +6,19 @@ class Producto():
     def __init__(self):
         self.session = SessionLocal()
 
+    def dic(self, producto):
+        return {
+            "id" : producto.id,
+            "nombre" : producto.nombre,
+            "descripcion" : producto.descripcion,
+            "precio" : producto.precio,
+            "categoria" : producto.categoria,
+            "subcategoria" : producto.subcategoria,
+            "marca" : producto.marca,
+            "url_imagen" : producto.url_imagen,
+            "variacion" : producto.variacion,
+            "cantidad_disponible" : producto.cantidad_disponible
+        }
 
     def nuevoProducto(self, producto): 
         if producto:
@@ -16,32 +29,48 @@ class Producto():
                 self.session.add(nuevo_producto)
                 self.session.commit()
 
+                flash('Producto agregado con exito', 200)
             except Exception as e: 
-                flash(f'Error {e}')
+                flash(f'Error {e}', 500)
                 self.session.rollback()
 
             finally:
                 self.session.close()
 
-    def editarProducto(self, producto):
-        if producto:
+    def editarProducto(self, productoActualizado):
+        if productoActualizado:
             try: 
-                id = self.session.query(Productos).filter_by(id=producto['id']).first()
-                if id:
-                    id.nombre = producto['nombre']
-                    id.descripcion = producto['descripcion']
-                    id.precio = producto['precio']
-                    id.categoria = producto['categoria']
-                    id.subcategoria = producto['subcategoria']
-                    id.marca = producto['marca']
-                    id.url_imagen = producto['url_imagen']
-                    id.variacion = producto['variacion']
-                    id.cantidad_disponible = producto['cantidad_disponible']
+                producto = self.session.query(Productos).filter_by(id=productoActualizado['id']).first()
+                if producto:
+                    producto.nombre = productoActualizado['nombre']
+                    producto.descripcion = productoActualizado['descripcion']
+                    producto.precio = productoActualizado['precio']
+                    producto.categoria = productoActualizado['categoria']
+                    producto.subcategoria = productoActualizado['subcategoria']
+                    producto.marca = productoActualizado['marca']
+                    producto.url_imagen = productoActualizado['url_imagen']
+                    producto.variacion = productoActualizado['variacion']
+                    producto.cantidad_disponible = productoActualizado['cantidad_disponible']
 
                     self.session.commit()
+
+                    return {
+                        "id": producto.id,
+                        "nombre": producto.nombre,
+                        "descripcion": producto.descripcion,
+                        "precio": producto.precio,
+                        "categoria": producto.categoria,
+                        "subcategoria": producto.subcategoria,
+                        "marca": producto.marca,
+                        "url_imagen": producto.url_imagen,
+                        "variacion": producto.variacion,
+                        "cantidad_disponible": producto.cantidad_disponible
+                    }
                 
                 else:
-                    flash('Producto no encontrado')
+                    return{
+                        "error" : "error en la BD"
+                    }
             
             except Exception as e:
                 flash(f"Error {e}")
@@ -57,8 +86,9 @@ class Producto():
                 if producto:
                     self.session.delete(producto)
                     self.session.commit()
+                    flash('Producto eliminado con exito', 200)
                 else:
-                    flash('Producto no encontrado.')
+                    flash('Producto no encontrado.', 500)
 
             except Exception as e:
                 flash(f'Error {e}')
@@ -69,10 +99,13 @@ class Producto():
     def obtenerTodos(self):
         try:
             productos = self.session.query(Productos).all()
-            return productos
+            productos_dic = []
+            for producto in productos:
+                productos_dic.append(self.dic(producto))
+            return productos_dic
         
         except Exception as e:
-            flash('Error al obtener los productos de la BD')
+            flash('Producto no encotrado', 500)
 
         finally:
             self.session.close()
@@ -84,7 +117,7 @@ class Producto():
                 return producto
             
             except Exception as e:
-                flash('Producto no encontrado.')
+                flash('Producto no encontrado.', 500)
 
             finally:
                 self.session.close()

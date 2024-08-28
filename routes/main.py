@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, jsonify ,render_template, request, redirect, url_for, flash
 from flask_wtf.csrf import CSRFProtect
 from flask_login import login_user, logout_user, login_required
 from models.auth import Autenticacion
@@ -62,17 +62,35 @@ def dashboard():
 @bp.route("/dashboard/stock")
 @login_required
 def stock():
+
+    return render_template('dashboard/stock.html')
+
+@bp.route("/dashboard/stock/products")
+@login_required
+def products():
     db = Producto()
     productos = db.obtenerTodos()
-    print(productos)
-    return(render_template('dashboard/stock.html', productos=productos))
+    return jsonify({"data":productos})
 
-@bp.route("/dashboard/stock/editar", methods=['POST'])
+@bp.route("/dashboard/stock/editar", methods=['PUT'])
 @login_required
 def editar():
     try:
         data = request.get_json()
-        print(data)
-        return render_template('dashboard/stock.html')
+        db = Producto()
+        productoActualizado = db.editarProducto(data)
+        flash('Datos actualizados correctamente.', 200)
+        return jsonify(productoActualizado)
+    
+    except Exception as e:
+        return f"error", str(e)
+    
+@bp.route("/dashboard/stock/eliminar/<int:id>", methods=['DELETE'])
+@login_required
+def eliminar(id):
+    try:
+        bd = Producto()
+        bd.eliminarProducto(id)
+        return jsonify({"msg":f"Producto {id} eliminado",}), 200
     except Exception as e:
         return f"error", str(e)
