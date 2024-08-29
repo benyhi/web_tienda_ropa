@@ -1,3 +1,80 @@
+/* GENERALES */
+html{
+    font-family: 'Roboto', serif;
+}
+
+.container{
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+}
+/* SIDEBAR */
+
+.side-menu {
+    width: 80px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #383737;
+    transition: width 0.3s ease;
+    overflow: hidden;
+}
+
+.nav{
+    justify-content: space-between;
+    height: 100%;
+}
+
+.nav-link{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-left: 2px solid transparent;
+}
+
+.side-logo{
+    color: white;
+    font-size: 1.5rem;
+    margin-left: 50px;
+}
+
+.nav-link:hover{
+    border-left: 2px solid  rgb(6, 143, 255);
+    color: rgb(77, 173, 252);
+}
+
+.nav-link span{
+    color: white;
+    font-size: 2rem;
+}
+
+/* SIDEBAR EXPANDIDO */
+#expand-btn{
+    background-color: transparent;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.expanded{
+    width: 250px;
+}
+
+.side-menu .nav-link .link-text {
+    margin-left: 10px;
+    opacity: 0;
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+}
+
+.side-menu.expanded .nav-link .link-text {
+    opacity: 1;
+}
+
+/* MODAL */
 .modal {
     display: none;
     position: fixed;
