@@ -2,7 +2,7 @@ from models.models import Usuario
 from config import SessionLocal
 from flask import flash
 
-class User:
+class Usuarios:
     def __init__(self):
         self.session = SessionLocal()
 

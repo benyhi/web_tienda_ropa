@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from config import Base, engine, SessionLocal
 from flask_login import LoginManager
-from models.bd import Usuario
+from models.user import Usuario
 
 
 app = Flask(__name__)
@@ -21,8 +21,12 @@ def load_user(id):
 Base.metadata.create_all(engine)
 
 with app.app_context():
-    from routes.main import bp
-    app.register_blueprint(bp)
+    from routes.main import mainbp
+    from routes.auth import authbp
+    from routes.dashboard import dashbp
+    app.register_blueprint(mainbp)
+    app.register_blueprint(authbp)
+    app.register_blueprint(dashbp)
 
 
 if __name__ == "__main__":
