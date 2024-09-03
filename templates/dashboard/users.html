@@ -1,0 +1,113 @@
+{% extends 'dashboard/panel.html' %}
+{% block content %}
+<div>
+    <table id="tabla-users">
+        <thead>
+            <th>ID</th>
+            <th>Nombre de usuario</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Fecha Creacion</th>
+        </thead>
+    </table>
+    <button id="agregar-btn">Agregar producto</button>
+</div>
+
+<div id="modal-agregar" class="modal">
+    <div class="modal-contenido">
+        <span class="close" id="cerrar-ag">&times;</span>
+        <h2>Agregar Producto</h2>
+        <form id="agregar-form">
+            <div hidden>
+                <label>ID:<input type="text" id="input-id-ag" readonly></label>
+            </div>
+            <div>
+                <label>Nombre:<input type="text" id="input-nombre-ag"></label>
+            </div>
+            <div>
+                <label>Email:<input type="email" id="input-email-ag"></label>
+            </div>
+            <div>
+                <label>Contraseña:<input type="password" id="input-contrasena-ag"></label>
+            </div>
+            <div>
+                <label>Rol:
+                <select id="input-rol-ag">
+                    <option disabled selected>Selecciona un rol...</option>
+                    <option value="cliente">Cliente</option>
+                    <option value="empleado">Empleado</option>
+                    <option value="proveedor">Proveedor</option>
+                    <option value="admin">Administrador</option>
+                </select>
+                </label>
+            </div>
+            <div>
+                <label>Estado:
+                <select id="input-estado-ag">
+                    <option disabled selected>Selecciona un estado...</option>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+                </label>
+            </div>
+            <button type="submit">Agregar producto</button>
+            <button id="cerrar-btn-ag">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+<div id="modal-editar" class="modal">
+    <div class="modal-contenido">
+        <span id="cerrar-editar" class="close">&times;</span>
+        <h2>Editar Producto</h2>
+        <form id="editar-form">
+            <div hidden>
+                <label>ID:<input type="text" id="input-id-ed" readonly></label>
+            </div>
+            <div>
+                <label>Nombre:<input type="text" id="input-nombre-ed"></label>
+            </div>
+            <div>
+                <label>Email:<input type="email" id="input-email-ed"></label>
+            </div>
+            <div>
+                <label>Contraseña:<input type="password" id="input-contrasena-ed"></label>
+            </div>
+            <div>
+                <label>Rol:
+                <select id="input-rol-ed">
+                    <option disabled selected>Selecciona un rol...</option>
+                    <option value="cliente">Cliente</option>
+                    <option value="empleado">Empleado</option>
+                    <option value="proveedor">Proveedor</option>
+                    <option value="admin">Administrador</option>
+                </select>
+                </label>
+            </div>
+            <div>
+                <label>Estado:
+                <select id="input-estado-ed">
+                    <option disabled selected>Selecciona un estado...</option>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+                </label>
+            </div>
+            <button type="submit">Agregar producto</button>
+            <button id="cerrar-btn-ed">Cancelar</button>
+        </form>
+    </div>
+</div>
+<script type="module" src="{{ url_for('static', filename='js/dashboard-users.js') }}"></script>
+{% block scripts %}
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- BOOTSTRAP 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- DATATABLES -->
+    <script src="https://cdn.datatables.net/2.1.4/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.4/js/dataTables.bootstrap5.min.js"></script>
+    <!-- LOCALES -->
+{% endblock %}
+{% endblock %}
