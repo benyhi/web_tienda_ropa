@@ -58,8 +58,6 @@ function abrirModalEditar(user){
     const modal = document.getElementById('modal-editar');
 
     document.getElementById('input-id-ed').value = user.id;
-    document.getElementById('input-nombre-ed').value = user.nombre;
-    document.getElementById('input-email-ed').value = user.email;
     document.getElementById('input-rol-ed').value = user.rol;
     document.getElementById('input-estado-ed').value = user.estado;
     
@@ -77,10 +75,8 @@ document.getElementById('editar-form').addEventListener('submit', function(event
 
     const dataAct = {
         id : document.getElementById('input-id-ed').value,
-        nombre_usuario : document.getElementById('input-nombre-ed').value,
-        email : document.getElementById('input-email-ed').value,
         rol : document.getElementById('input-rol-ed').value,
-        estado : document.getElementById('input-estado-ed').value,
+        estado : document.getElementById('input-estado-ed').value
     };
 
     fetch('users/update', {
@@ -90,9 +86,17 @@ document.getElementById('editar-form').addEventListener('submit', function(event
         },
         body: JSON.stringify(dataAct)
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
-        usersDataTable.row(filaIndex).data(dataAct).draw();
+        console.log(data)
+        usersDataTable.row(filaIndex).data({
+            id: data.id,
+            nombre_usuario: data.nombre_usuario,
+            email: data.email,
+            rol: data.rol,
+            estado: data.estado,
+            fecha_creacion: data.fecha_creacion
+        }).draw();
     })
     .catch(error => {
         console.error('Error:', error);
@@ -145,7 +149,6 @@ document.getElementById('agregar-form').addEventListener('submit', function(even
         contrasena : document.getElementById('input-contrasena-ag').value,
         rol : document.getElementById('input-rol-ag').value,
         estado : document.getElementById('input-estado-ag').value,
-        fecha_creacion : new Date().getUTCDate()
     }
 
     fetch('users/new', {
@@ -157,8 +160,14 @@ document.getElementById('agregar-form').addEventListener('submit', function(even
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
-        usersDataTable.row.add(data.data[0]).draw()
+        usersDataTable.row.add({
+            id: data.id,
+            nombre_usuario: data.nombre_usuario,
+            email: data.email,
+            rol: data.rol,
+            estado: data.estado,
+            fecha_creacion: data.fecha_creacion
+        }).draw();
     })
     .catch(error => {
         console.error('Error:', error);

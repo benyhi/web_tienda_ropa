@@ -11,13 +11,13 @@
             <th>Fecha Creacion</th>
         </thead>
     </table>
-    <button id="agregar-btn">Agregar producto</button>
+    <button id="agregar-btn">Agregar usuarios</button>
 </div>
 
 <div id="modal-agregar" class="modal">
     <div class="modal-contenido">
         <span class="close" id="cerrar-ag">&times;</span>
-        <h2>Agregar Producto</h2>
+        <h2>Agregar Usuarios</h2>
         <form id="agregar-form">
             <div hidden>
                 <label>ID:<input type="text" id="input-id-ag" readonly></label>
@@ -51,7 +51,7 @@
                 </select>
                 </label>
             </div>
-            <button type="submit">Agregar producto</button>
+            <button type="submit">Agregar usuario</button>
             <button id="cerrar-btn-ag">Cancelar</button>
         </form>
     </div>
@@ -60,19 +60,10 @@
 <div id="modal-editar" class="modal">
     <div class="modal-contenido">
         <span id="cerrar-editar" class="close">&times;</span>
-        <h2>Editar Producto</h2>
+        <h2>Permisos usuario</h2>
         <form id="editar-form">
             <div hidden>
                 <label>ID:<input type="text" id="input-id-ed" readonly></label>
-            </div>
-            <div>
-                <label>Nombre:<input type="text" id="input-nombre-ed"></label>
-            </div>
-            <div>
-                <label>Email:<input type="email" id="input-email-ed"></label>
-            </div>
-            <div>
-                <label>Contraseña:<input type="password" id="input-contrasena-ed"></label>
             </div>
             <div>
                 <label>Rol:
@@ -94,7 +85,7 @@
                 </select>
                 </label>
             </div>
-            <button type="submit">Agregar producto</button>
+            <button type="submit">Guardar cambios</button>
             <button id="cerrar-btn-ed">Cancelar</button>
         </form>
     </div>

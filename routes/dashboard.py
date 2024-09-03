@@ -71,7 +71,6 @@ def users():
 def all_users():
     bd = Usuarios()
     usuarios = bd.obtenerTodos()
-    print(usuarios)
     return jsonify({"data": usuarios})
 
 @dashbp.route("/dashboard/users/update", methods=['PUT'])
@@ -92,8 +91,7 @@ def new_user():
         data = request.get_json()
         bd = Usuarios()
         nuevo_usuario = bd.nuevoUsuario(data)
-        print(nuevo_usuario)
-        return jsonify({"data": [nuevo_usuario]})
+        return jsonify(nuevo_usuario)
     
     except Exception as e:
         return f"error", str(e)

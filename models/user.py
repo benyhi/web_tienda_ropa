@@ -9,9 +9,9 @@ class Usuarios:
 
     def dic(self, usuario):
         if usuario.estado == True :
-            usuario.estado = 'Activo'
+            usuario.estado = 'activo'
         else:
-            usuario.estado = 'Inactivo'
+            usuario.estado = 'inactivo'
 
         return {
             "id" : usuario.id,
@@ -28,6 +28,7 @@ class Usuarios:
 
     def nuevoUsuario(self, usuarioNuevo):   
         if usuarioNuevo:
+
             try:
                 if 'estado' in usuarioNuevo:
                     if usuarioNuevo['estado'] == 'activo':
@@ -43,7 +44,7 @@ class Usuarios:
                     usuarioNuevo['rol'] = 'cliente'
                     estadoBool = True
 
-                contrasena_hashed = generate_password_hash(usuarioNuevo['password'])
+                contrasena_hashed = generate_password_hash(usuarioNuevo['contrasena'])
 
                 nuevo_usuario = Usuario(
                     nombre_usuario = usuarioNuevo['nombre_usuario'],
@@ -54,7 +55,7 @@ class Usuarios:
                 
                 self.session.add(nuevo_usuario)
                 self.session.commit()
-                print(f'usuario agregado con exito {nuevo_usuario}')
+                flash(f'usuario agregado con exito {nuevo_usuario}')
                 
                 usuario_dic = self.dic(nuevo_usuario)
                 return usuario_dic
@@ -68,14 +69,15 @@ class Usuarios:
 
     def editarUsuario(self, usuarioActualizado):
         if usuarioActualizado:
+            if usuarioActualizado['estado'] == 'activo':
+                estadoBool = True
+            else:
+                estadoBool = False
             try: 
                 usuario = self.session.query(Usuario).filter_by(id=usuarioActualizado['id']).first()
                 if usuario:
-                    usuario.nombre_usuario = usuarioActualizado['nombre']
-                    usuario.email = usuarioActualizado['email']
-                    usuario.contrasena = Autenticacion.hash_password(usuarioActualizado['contrasena'])
                     usuario.rol = usuarioActualizado['rol']
-                    usuario.estado = usuarioActualizado['estado']
+                    usuario.estado = estadoBool
 
                     self.session.commit()
                     flash('Usuario actualizado en la BD.', 200)
