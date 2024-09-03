@@ -6,6 +6,7 @@ let usersDataTable;
 const usersColumns = [
     {data: "id",
         defaultContent: 0,
+        "visible":false
     },
     {data: "nombre_usuario"},
     {data: "email"},
@@ -15,12 +16,13 @@ const usersColumns = [
     {
         data: null,
         defaultContent:`
-            <button class="editar">Editar</button>
-            <button class="eliminar">Eliminar</button>
+            <div class="tabla-btn">
+                <button class="editar">Editar</button>
+                <button class="eliminar">Eliminar</button>
+            </div>
         `
     }
 ];
-
 
 // EVENTO PARA CARGAR DATOS EN LA TABLA
 document.addEventListener("DOMContentLoaded", function(){

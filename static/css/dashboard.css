@@ -3,12 +3,6 @@ html{
     font-family: 'Roboto', serif;
 }
 
-.container{
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-    padding: 0;
-}
 /* SIDEBAR */
 
 .side-menu {
@@ -73,6 +67,49 @@ html{
 .side-menu.expanded .nav-link .link-text {
     opacity: 1;
 }
+
+/* TABLAS */
+.tabla{
+    height: 70vh !important;
+}
+
+.tabla-btn{
+    display: flex;
+    column-gap: .5rem;
+}
+
+.tabla-btn .editar{
+    background-color: rgb(23, 211, 23);
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: .5rem 1rem;
+    transition: background-color .3s ease;
+}
+
+.tabla-btn .editar:hover{
+    background-color: rgb(23, 190, 23);
+}
+
+
+.tabla-btn .eliminar{
+    background-color: rgb(185, 4, 4);
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: .5rem 1rem;
+    transition: background-color .3s ease;
+}
+
+.tabla-btn .eliminar:hover{
+    background-color: rgb(165, 4, 4);
+}
+
+
+
+
+
+
 
 /* MODAL */
 .modal {

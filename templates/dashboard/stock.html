@@ -2,7 +2,7 @@
 
 {% block content %}
 <div>
-    <table id="tabla">
+    <table id="tabla" class="tabla table table-striped table-bordered">
         <thead>
             <th>ID</th>
             <th>Codigo</th>
@@ -14,10 +14,9 @@
             <th>Marca</th>
             <th>Variacion</th>
             <th>Cantidad Disponible</th>
-            <th>Acciones</th>
         </thead>
     </table>
-    <button id="agregar-btn">Agregar producto</button>
+    <button id="agregar-btn" class="btn btn-primary">Agregar producto</button>
 
     <div id="modal-agregar" class="modal">
         <div class="modal-contenido">
@@ -121,15 +120,8 @@
         </div>
     </div>
 </div>
-<script type="module" src="{{ url_for('static', filename='js/dashboard-stock.js') }}"></script>
 {% block scripts %}
-    <!-- JQUERY -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- BOOTSTRAP 5 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <!-- DATATABLES -->
-    <script src="https://cdn.datatables.net/2.1.4/js/dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/2.1.4/js/dataTables.bootstrap5.min.js"></script>
-    <!-- LOCALES -->
+{{ super() }}
+    <script type="module" src="{{ url_for('static', filename='js/dashboard-stock.js') }}"></script>
 {% endblock %}
 {% endblock %}

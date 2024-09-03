@@ -42,7 +42,6 @@ def editar():
         data = request.get_json()
         db = Productos()
         productoActualizado = db.editarProducto(data)
-        flash('Datos actualizados correctamente.', 200)
         return jsonify(productoActualizado)
     
     except Exception as e:

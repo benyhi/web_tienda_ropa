@@ -28,9 +28,9 @@ class Productos():
                                         variacion = producto['variacion'], cantidad_disponible = producto['cantidad_disponible'])
                 self.session.add(nuevo_producto)
                 self.session.commit()
-                flash('Producto agregado con exito', 200)
-                print('Producto agregado', nuevo_producto)
-                
+
+                flash('Producto agregado con exito.', 'succes')
+
                 return {
                         "id": nuevo_producto.id,
                         "codigo": nuevo_producto.codigo,
@@ -45,7 +45,7 @@ class Productos():
                     }
             
             except Exception as e: 
-                flash(f'Error {e}', 500)
+                flash(f'Error al agregar producto {e}', 'warning')
                 print('error',e)
                 self.session.rollback()
 
@@ -69,6 +69,8 @@ class Productos():
 
                     self.session.commit()
 
+                    flash('Producto actualizado con exito.','succes')
+
                     return {
                         "id": producto.id,
                         "codigo": producto.codigo,
@@ -82,13 +84,8 @@ class Productos():
                         "cantidad_disponible": producto.cantidad_disponible
                     }
                 
-                else:
-                    return{
-                        "error" : "error en la BD"
-                    }
-            
             except Exception as e:
-                flash(f"Error {e}")
+                flash(f"Error al actualizar el producto. {e}", 'warning')
                 self.session.rollback()
 
             finally:
@@ -101,12 +98,10 @@ class Productos():
                 if producto:
                     self.session.delete(producto)
                     self.session.commit()
-                    flash('Producto eliminado con exito', 200)
-                else:
-                    flash('Producto no encontrado.', 500)
+                    flash('Producto eliminado con exito', 'succes')
 
             except Exception as e:
-                flash(f'Error {e}')
+                flash(f'Error al eliminar el producto. {e}', 'warning')
 
             finally:
                 self.session.close()
@@ -120,7 +115,7 @@ class Productos():
             return productos_dic
         
         except Exception as e:
-            flash('Producto no encotrado', 500)
+            flash('Productos no encotrados', 'warning')
 
         finally:
             self.session.close()
@@ -132,7 +127,7 @@ class Productos():
                 return producto
             
             except Exception as e:
-                flash('Producto no encontrado.', 500)
+                flash('Producto no encontrado.', 'warning')
 
             finally:
                 self.session.close()

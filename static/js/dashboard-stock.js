@@ -6,6 +6,7 @@ let productoDataTable;
 const productoColumns = [
     {data: "id",
         defaultContent: 0,
+        "visible":false
     },
     {data: "codigo"},
     {data: "nombre"},
@@ -19,8 +20,10 @@ const productoColumns = [
     {
         data: null,
         defaultContent:`
-            <button class="editar">Editar</button>
-            <button class="eliminar">Eliminar</button>
+            <div class="tabla-btn">
+                <button class="editar">Editar</button>
+                <button class="eliminar">Eliminar</button>
+            </div>
         `
     }
 ];

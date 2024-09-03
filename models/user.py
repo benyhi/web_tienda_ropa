@@ -55,13 +55,13 @@ class Usuarios:
                 
                 self.session.add(nuevo_usuario)
                 self.session.commit()
-                flash(f'usuario agregado con exito {nuevo_usuario}')
+                flash(f'Usuario agregado con exito {nuevo_usuario.nombre_usuario}', 'succes')
                 
                 usuario_dic = self.dic(nuevo_usuario)
                 return usuario_dic
                 
             except Exception as e: 
-                print(f'Error {e}', 500)
+                flash(f'Error al agregar usuario. {e}', 'warning')
                 self.session.rollback()
 
             finally:
@@ -80,16 +80,14 @@ class Usuarios:
                     usuario.estado = estadoBool
 
                     self.session.commit()
-                    flash('Usuario actualizado en la BD.', 200)
+
+                    flash('Usuario actualizado con exito.', 'succes')
 
                     usuario_dic = self.dic(usuario)
                     return usuario_dic
-                
-                else:
-                    flash('Usuario no encontrado.', 500)
             
             except Exception as e:
-                flash(f"Error {e}")
+                flash(f"Error al actualizar el usuario. {e}", 'warning')
                 self.session.rollback()
 
             finally:
@@ -102,12 +100,10 @@ class Usuarios:
                 if usuario:
                     self.session.delete(usuario)
                     self.session.commit()
-                    flash('Usuario eliminado con exito', 200)
-                else:
-                    flash('Usuario no encontrado.', 500)
+                    flash('Usuario eliminado con exito', 'succes')
 
             except Exception as e:
-                flash(f'Error {e}')
+                flash(f'Error al eliminar el usuario. {e}', 'warning')
 
             finally:
                 self.session.close()
@@ -121,8 +117,7 @@ class Usuarios:
             return usuario_dic
         
         except Exception as e:
-            print(f'ERROR AL OBTENER USUARIOS: {e}')
-            flash('Usuario no encotrado', 500)
+            flash('Usuarios no encotrados', 'warning')
 
         finally:
             self.session.close()
@@ -134,7 +129,7 @@ class Usuarios:
                 return usuario
             
             except Exception as e:
-                flash('Usuario no encontrado.', 500)
+                flash('Usuario no encontrado.', 'warning')
 
             finally:
                 self.session.close()
