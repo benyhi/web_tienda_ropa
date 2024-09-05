@@ -20,7 +20,7 @@ def register():
             user = {
                 "nombre_usuario": form.nombre_usuario.data,
                 "email": form.email.data,
-                "password": form.password.data
+                "contrasena": form.contrasena.data
             }
 
             usuarios.nuevoUsuario(user)
@@ -42,7 +42,7 @@ def login():
         
         if user:
 
-            if usuarios.verificar_password(user.contrasena, form.password.data):
+            if usuarios.verificar_password(user.contrasena, form.contrasena.data):
                 login_user(user)
                 flash('Inicio de sesion exitoso.')
 

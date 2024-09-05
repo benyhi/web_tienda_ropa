@@ -1,0 +1,85 @@
+{% extends "dashboard/panel.html" %}
+
+{% block content %}
+<div>
+    <table id="tabla-clients">
+        <thead>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Nombre</th>
+            <th>CUIT</th>
+            <th>Telefono</th>
+            <th>Direccion</th>
+            <th>Fecha Creacion</th>
+        </thead>
+    </table>
+    <button id="agregar-btn" class="btn btn-primary">Agregar cliente</button>
+
+    <div id="modal-agregar" class="modal">
+        <div class="modal-contenido">
+            <span class="close" id="cerrar-ag">&times;</span>
+            <h2>Agregar cliente</h2>
+            <form id="agregar-form">
+                <div hidden>
+                    <label for="input-id-ag">ID:</label>
+                    <input type="text" id="input-id-ag" readonly>
+                </div>
+                <div>
+                    <label for="input-nombre-ag">Nombre:</label>
+                    <input type="text" id="input-nombre-ag">
+                </div>
+                <div>
+                    <label for="input-cuit-ag">CUIT:</label>
+                    <input type="text" id="input-cuit-ag">
+                </div>
+                <div>
+                    <label for="input-telefono-ag">Telefono:</label>
+                    <input type="text" id="input-telefono-ag">
+                </div>
+                <div>
+                    <label for="input-direccion-ag">Direccion:</label>
+                    <input type="text" id="input-direccion-ag">
+                </div>
+                <button type="submit">Agregar producto</button>
+                <button id="cerrar-btn-ag">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-editar" class="modal">
+        <div class="modal-contenido">
+            <span id="cerrar-editar" class="close">&times;</span>
+            <h2>Editar cliente</h2>
+            <form id="editar-form">
+                <div>
+                    <label for="input-id-ed">ID:</label>
+                    <input type="text" id="input-id-ed" readonly>
+                </div>
+                <div>
+                    <label for="input-nombre-ed">Nombre:</label>
+                    <input type="text" id="input-nombre-ed">
+                </div>
+                <div>
+                    <label for="input-cuit-ed">CUIT:</label>
+                    <input type="text" id="input-cuit-ed">
+                </div>
+                <div>
+                    <label for="input-telefono-ed">Telefono:</label>
+                    <input type="text" id="input-telefono-ed">
+                </div>
+                <div>
+                    <label for="input-direccion-ed">Direccion:</label>
+                    <input type="text" id="input-direccion-ed">
+                </div>
+                <button type="submit">Guardar Cambios</button>
+                <button id="cerrar-btn-ed" type="button">Cancelar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% block scripts %}
+{{ super() }}
+    <script type="module" src="{{ url_for('static', filename='js/dashboard-clients.js') }}"></script>
+{% endblock %}
+
+{% endblock%}   

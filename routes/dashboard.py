@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required
 from models.product import Productos
 from models.user import Usuarios
+from models.client import Clientes
 
 dashbp = Blueprint('dash', __name__, template_folder='/templates')
 
@@ -102,5 +103,58 @@ def delete_user(id):
         bd = Usuarios()
         bd.eliminarUsuario(id)
         return jsonify({"msg":f"Producto {id} eliminado",}), 200
+    except Exception as e:
+        return f"error", str(e)
+    
+
+#CLIENTES
+
+@dashbp.route("/dashboard/clients")
+@login_required
+def clients():
+    return render_template('dashboard/clients.html')
+
+@dashbp.route("/dashboard/clients/all")
+@login_required
+def all_clients():
+    try:
+        db = Clientes()
+        clientes = db.obtenerTodos()
+        return jsonify(clientes)
+    
+    except Exception as e:
+        return f"Error al obtener productos", str(e)
+
+@dashbp.route("/dashboard/clients/new", methods=['POST'])
+@login_required
+def new_client():
+    try: 
+        data = request.get_json()
+        bd = Clientes()
+        nuevo_cliente = bd.agaregarCliente(data)
+        return jsonify(nuevo_cliente)
+    
+    except Exception as e:
+        return f"error", str(e)
+    
+
+@dashbp.route("/dashboard/clients/update", methods=['PUT'])
+@login_required
+def update_client():
+    try:
+        data = request.get_json()
+        bd = Clientes()
+        cliente_actualizado = bd.actualizarCliente(data)
+        return jsonify(cliente_actualizado)
+    except Exception as e:
+        return f"error", str(e)
+    
+@dashbp.route("/dashboard/clients/delete/<int:id>", methods=['DELETE'])
+@login_required
+def delete_client(id):
+    try:
+        bd = Clientes()
+        bd.eliminarCliente(id)
+        return jsonify({"msg":f"Cliente {id} eliminado",}), 200
     except Exception as e:
         return f"error", str(e)

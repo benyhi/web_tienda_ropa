@@ -28,13 +28,18 @@ html{
     border-left: 2px solid transparent;
 }
 
+span.link-text{
+    font-size: 1rem !important;
+    margin-left: 3rem;
+}
+
 .side-logo{
     color: white;
     font-size: 1.5rem;
     margin-left: 50px;
 }
 
-.nav-link:hover{
+.active{
     border-left: 2px solid  rgb(6, 143, 255);
     color: rgb(77, 173, 252);
 }
@@ -104,11 +109,6 @@ html{
 .tabla-btn .eliminar:hover{
     background-color: rgb(165, 4, 4);
 }
-
-
-
-
-
 
 
 /* MODAL */

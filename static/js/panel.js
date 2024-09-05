@@ -1,7 +1,11 @@
+//SIDE BAR EXPAND
 document.getElementById('expand-btn').addEventListener('click', function(){
     document.getElementById('side-menu').classList.toggle('expanded');
 });
 
+
+
+//DATA TABLE
 export function initDataTable(tableId, ajaxUrl, columnsConfig){
     return new DataTable(document.getElementById(tableId),{
         ajax: {
